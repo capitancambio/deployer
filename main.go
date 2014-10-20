@@ -143,13 +143,11 @@ func (a Api) ListAssets(r Release) (as []Asset, err error) {
 	if err != nil {
 		return
 	}
-	fmt.Printf("res.Status %+v\n", res.Status)
 	if res.StatusCode != http.StatusOK {
 		return as, fmt.Errorf("Listing releases status %v", res.Status)
 	}
 
 	err = json.NewDecoder(res.Body).Decode(&as)
-	fmt.Printf("as %+v\n", as)
 	return
 }
 
@@ -206,7 +204,6 @@ func (a Api) UploadAsset(r Release, file string) error {
 		}
 		return err
 	}
-	fmt.Println("Done", file)
 	return nil
 
 }
@@ -275,7 +272,7 @@ func main() {
 	}
 	for i := 0; i < len(fileList); i++ {
 		f := <-dones
-		fmt.Printf("done %+v\n", f)
+		fmt.Printf("Done %+v\n", f)
 	}
 
 }
