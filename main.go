@@ -162,12 +162,12 @@ func (a Api) CleanAssets(r Release) error {
 		req, err := a.Request("DELETE", ass.Url, nil)
 		if err != nil {
 			fmt.Println(err.Error())
-			break
+			continue
 		}
 		res, err := (&http.Client{}).Do(req)
 		if err != nil {
 			fmt.Println(err.Error())
-			break
+			continue
 		}
 		if res.StatusCode != http.StatusOK {
 			fmt.Printf("res %+v\n", res.Status)
