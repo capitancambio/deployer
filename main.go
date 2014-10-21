@@ -161,15 +161,16 @@ func (a Api) CleanAssets(r Release) error {
 		fmt.Print("Deleting asset ", ass.Name, ass.Url)
 		req, err := a.Request("DELETE", ass.Url, nil)
 		if err != nil {
-			return err
+			fmt.Println(err.Error())
+			break
 		}
 		res, err := (&http.Client{}).Do(req)
 		if err != nil {
-			return err
+			fmt.Println(err.Error())
+			break
 		}
 		if res.StatusCode != http.StatusOK {
-			fmt.Printf("res %+v\n", res)
-			return err
+			fmt.Printf("res %+v\n", res.Status)
 		}
 
 	}
