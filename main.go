@@ -195,13 +195,13 @@ func (a Api) UploadAsset(r Release, file string) error {
 		return err
 	}
 	if res.StatusCode != http.StatusCreated {
-		fmt.Printf("res %+v\n", res)
 		result := map[string]interface{}{}
 		err2 := json.NewDecoder(res.Body).Decode(&result)
 		if err2 != nil {
 			return err2
 
 		}
+		fmt.Printf("Result %+v\n", result)
 		return err
 	}
 	return nil
@@ -264,7 +264,7 @@ func main() {
 		go func() {
 			err := api.UploadAsset(r, f)
 			if err != nil {
-				fmt.Println(err.Error())
+				fmt.Println(f, ":   ", err.Error())
 
 			}
 			dones <- f
